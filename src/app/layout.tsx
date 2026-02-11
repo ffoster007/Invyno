@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Invy",
-  description: "Invy - Investment Tracker",
+  title: "Invyno",
+  description: "Invyno - Investment Tracker",
 };
 
 export default function RootLayout({

@@ -62,13 +62,13 @@ export default function LandingPage() {
        <div className="flex items-center gap-3">
           {/* Custom Logo */}
           <Image 
-            src="/Invy.png" 
-            alt="Invy Logo" 
+            src="/Invyno.png" 
+            alt="Invyno Logo" 
             width={40} 
             height={40}
             className="w-10 h-10"
           />
-          <span className="text-xl font-light tracking-tight">Invy</span>
+          <span className="text-xl font-light tracking-tight">Invyno</span>
         </div>
         
         <div className="hidden md:flex items-center gap-8 text-sm">
