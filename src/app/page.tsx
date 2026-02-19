@@ -1,7 +1,7 @@
 'use client';
-
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
@@ -77,9 +77,11 @@ export default function LandingPage() {
           <a href="#" className="text-gray-400 hover:text-[#EFDB00] transition-colors tracking-wider">PRICING</a>
         </div>
         
+        <Link href="/auth/signup">
         <button className="px-6 py-2 border border-[#EFDB00] text-[#EFDB00] hover:bg-[#EFDB00] hover:text-black text-sm tracking-wider cursor-pointer">
-          Get Started
+            Get Started
         </button>
+        </Link>
       </nav>
 
       {/* Main Content */}
