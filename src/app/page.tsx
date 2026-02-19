@@ -72,9 +72,9 @@ export default function LandingPage() {
         </div>
         
         <div className="hidden md:flex items-center gap-8 text-sm">
-          <a href="#" className="text-gray-400 hover:text-[#EFDB00] transition-colors tracking-wider">INVESTORS</a>
-          <a href="#" className="text-gray-400 hover:text-[#EFDB00] transition-colors tracking-wider">ANALYTICS</a>
-          <a href="#" className="text-gray-400 hover:text-[#EFDB00] transition-colors tracking-wider">PRICING</a>
+          <a href="/landing/investors" className="text-gray-400 hover:text-[#EFDB00] transition-colors tracking-wider">INVESTORS</a>
+          <a href="/landing/features" className="text-gray-400 hover:text-[#EFDB00] transition-colors tracking-wider">FEATURES</a>
+          <a href="/landing/pricing" className="text-gray-400 hover:text-[#EFDB00] transition-colors tracking-wider">PRICING</a>
         </div>
         
         <Link href="/auth/signup">
