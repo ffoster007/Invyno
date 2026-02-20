@@ -53,7 +53,7 @@ function NavButton({
       className={[
         "w-full h-10 px-2.5 rounded-lg",
         "flex items-center gap-3",
-        "transition-colors duration-150",
+        "transition-colors cursor-pointer",
         isActive
           ? "bg-[#1f6feb] text-white shadow-lg shadow-[#1f6feb]/30"
           : "text-[#8b949e] hover:bg-[#161b22] hover:text-[#c9d1d9]",
