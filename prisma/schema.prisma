@@ -7,6 +7,7 @@
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
+  engine    = "classic"
 }
 
 datasource db {
@@ -14,11 +15,73 @@ datasource db {
 }
 
 model User { 
-  id    Int     @id @default(autoincrement()) 
-  username String  @unique
-  email String  @unique
-  password String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              Int       @id @default(autoincrement()) 
+  username        String    @unique
+  email           String    @unique
+  password        String?   // Nullable for OAuth users
+  emailVerified   Boolean   @default(false)
+  image           String?   // For OAuth profile images
+  provider        String?   // 'credentials' or 'google'
+  providerId      String?   // OAuth provider user ID
+  failedLoginAttempts Int   @default(0)
+  lockedUntil     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  refreshTokens   RefreshToken[]
+  accountLockouts AccountLockout[]
+  rateLimits      RateLimit[]
+}
 
+model RefreshToken {
+  id          String    @id @default(uuid())
+  token       String    @unique
+  userId      Int
+  expiresAt   DateTime
+  createdAt   DateTime  @default(now())
+  revokedAt   DateTime?
+  
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([token])
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model AccountLockout {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  lockedAt    DateTime  @default(now())
+  lockedUntil DateTime
+  reason      String?   // e.g., "too_many_failed_attempts"
+  
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([lockedUntil])
+}
+
+model RateLimit {
+  id          Int       @id @default(autoincrement())
+  identifier  String   // IP address or user ID
+  endpoint    String
+  count       Int       @default(1)
+  windowStart DateTime  @default(now())
+  
+  user        User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int?
+  
+  @@unique([identifier, endpoint, windowStart])
+  @@index([identifier, endpoint])
+  @@index([windowStart])
+}
+
+model TokenBlacklist {
+  id          Int       @id @default(autoincrement())
+  token       String    @unique
+  expiresAt   DateTime
+  createdAt   DateTime  @default(now())
+  
+  @@index([token])
+  @@index([expiresAt])
 } 

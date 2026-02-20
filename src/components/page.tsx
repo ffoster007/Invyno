@@ -8,7 +8,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useState, useMemo } from "react";
-import Sidebar from "@/components/ui/activitybar/page";
+import Sidebar from "@/components/ui/activitybar/Sidebar";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
