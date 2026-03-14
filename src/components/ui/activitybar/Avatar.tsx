@@ -70,7 +70,7 @@ export default function Avatar({
         onClick={handleAvatarClick}
         className={[
           SIZE[size],
-          "rounded-full shrink-0 select-none",
+          "rounded-full shrink-0 select-none cursor-pointer",
           "bg-gradient-to-br from-[#39d353] to-[#1f6feb]",
           "flex items-center justify-center",
           "font-bold text-white",
@@ -107,7 +107,7 @@ export default function Avatar({
             <button
               type="button"
               onClick={handleLogout}
-              className="w-full px-4 py-2.5 text-left text-sm text-[#e6edf3] hover:bg-[#161b22] transition-colors flex items-center gap-3"
+              className="w-full px-4 py-2.5 text-left text-sm text-[#e6edf3] hover:bg-[#F54927] transition-colors flex items-center gap-3 cursor-pointer"
             >
               <LogOut className="w-4 h-4" />
               <span>Logout</span>
