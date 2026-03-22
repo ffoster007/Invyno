@@ -79,7 +79,7 @@ Scripts under **`scripts/`** only run the **desktop packaging**
 ### Linux / macOS
 
 ```bash
-bash scripts/buildapp.sh
+bash build/buildapp.sh
 ```
 
 Produces platform artifacts under **`webapp/release/`** (e.g. **AppImage** / **deb** on Linux, **dmg** / **zip** on macOS).
@@ -87,7 +87,7 @@ Produces platform artifacts under **`webapp/release/`** (e.g. **AppImage** / **d
 ### Windows
 
 ```powershell
-.\scripts\buildapp.ps1
+.\build\buildapp.ps1
 ```
 
 Produces **`webapp/release/Invyno Setup *.exe`** (NSIS) and **`webapp/release/win-unpacked/`**.
