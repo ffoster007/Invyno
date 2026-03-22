@@ -2,11 +2,16 @@
   "name": "invy",
   "version": "0.1.0",
   "private": true,
+  "author": "Invyno",
+  "main": "electron/main.js",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "prepare:standalone": "node scripts/prepare-standalone.cjs",
+    "electron:dev": "concurrently -k \"next dev -p 3000\" \"wait-on tcp:127.0.0.1:3000 && cross-env ELECTRON_DEV_URL=http://127.0.0.1:3000 electron .\"",
+    "electron:build": "npm run build && npm run prepare:standalone && electron-builder"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.4.1",
@@ -27,12 +32,67 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^35.7.5",
+    "electron-builder": "^26.0.12",
     "eslint": "^10.0.0",
     "eslint-config-next": "^0.2.4",
     "prisma": "^7.5.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wait-on": "^8.0.5"
+  },
+  "build": {
+    "appId": "com.invyno.desktop",
+    "productName": "Invyno",
+    "icon": "resource/Invy.png",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": ".next/standalone",
+        "to": "app-server"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "mac": {
+      "category": "public.app-category.finance",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "linux": {
+      "category": "Finance",
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "maintainer": "Invyno"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
   }
 }

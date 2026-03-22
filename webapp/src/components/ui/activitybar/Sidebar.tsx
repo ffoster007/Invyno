@@ -112,8 +112,7 @@ export default function Sidebar({ active, onNavigate }: SidebarProps) {
         }
 
         // Fetch user data from API
-        const API_BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-        const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
+        const response = await fetch(`/api/auth/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

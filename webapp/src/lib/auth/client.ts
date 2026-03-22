@@ -2,7 +2,12 @@
  * Client-side authentication utilities
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+function apiBase(): string {
+  if (typeof window !== "undefined") {
+    return "";
+  }
+  return process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+}
 
 export interface AuthResponse {
   success: boolean;
@@ -15,6 +20,7 @@ export interface AuthResponse {
   accessToken?: string;
   error?: string;
   message?: string;
+  details?: unknown;
 }
 
 /**
@@ -50,7 +56,7 @@ export function removeAccessToken(): void {
  */
 export async function signIn(email: string, password: string): Promise<AuthResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/auth/signin`, {
+    const response = await fetch(`${apiBase()}/api/auth/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +86,7 @@ export async function signUp(
   password: string
 ): Promise<AuthResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
+    const response = await fetch(`${apiBase()}/api/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -108,7 +114,7 @@ export async function signOut(): Promise<void> {
   const token = getAccessToken();
   
   try {
-    await fetch(`${API_BASE_URL}/api/auth/logout`, {
+    await fetch(`${apiBase()}/api/auth/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -131,7 +137,7 @@ export async function signOut(): Promise<void> {
  */
 export async function refreshAccessToken(): Promise<string | null> {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/auth/refresh`, {
+    const response = await fetch(`${apiBase()}/api/auth/refresh`, {
       method: "POST",
       credentials: "include", // Include cookies
     });
@@ -154,7 +160,7 @@ export async function refreshAccessToken(): Promise<string | null> {
  */
 export async function getGoogleAuthUrl(): Promise<string> {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/auth/google`, {
+    const response = await fetch(`${apiBase()}/api/auth/google`, {
       method: "POST",
     });
 

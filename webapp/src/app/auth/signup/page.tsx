@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signUp, getGoogleAuthUrl } from "@/lib/auth/client";
 
@@ -125,7 +125,7 @@ function InputField({ label, name, type = "text", value, onChange, placeholder, 
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function SignUpPage() {
+function SignUpPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({ name: "", email: "", password: "", confirmPassword: "" });
@@ -335,5 +335,24 @@ export default function SignUpPage() {
         </p>
       </div>
     </main>
+  );
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense
+      fallback={
+        <main
+          className="min-h-screen flex items-center justify-center"
+          style={{ backgroundColor: colors.bg }}
+        >
+          <p className="text-sm" style={{ color: colors.muted }}>
+            Loading…
+          </p>
+        </main>
+      }
+    >
+      <SignUpPageContent />
+    </Suspense>
   );
 }

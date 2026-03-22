@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     const validationResult = signInSchema.safeParse(body);
     if (!validationResult.success) {
       return NextResponse.json(
-        { error: "Validation error", details: validationResult.error.errors },
+        { error: "Validation error", details: validationResult.error.issues },
         { status: 400 }
       );
     }

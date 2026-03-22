@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, getGoogleAuthUrl } from "@/lib/auth/client";
 
@@ -149,7 +149,7 @@ function Checkbox({ checked, onChange }: { checked: boolean; onChange: (e: React
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function SignInPage() {
+function SignInPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({ email: "", password: "", remember: false });
@@ -339,5 +339,24 @@ export default function SignInPage() {
         </p>
       </div>
     </main>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense
+      fallback={
+        <main
+          className="min-h-screen flex items-center justify-center"
+          style={{ backgroundColor: colors.bg }}
+        >
+          <p className="text-sm" style={{ color: colors.muted }}>
+            Loading…
+          </p>
+        </main>
+      }
+    >
+      <SignInPageContent />
+    </Suspense>
   );
 }
