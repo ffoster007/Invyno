@@ -1,6 +1,6 @@
 <div align="center">
   <a href="#">
-    <img src= "./resources/Invy.png" alt="Logo" width="80" height="80">
+    <img src= "./resources/Banner.png" alt="Logo">
   </a>
 
   <h3 align="center">Invyno</h3>
