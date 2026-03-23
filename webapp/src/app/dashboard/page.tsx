@@ -6,7 +6,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Page from "@/components/EnhancedPage";
+import Page from "@/components/page";
 import { getAccessToken, refreshAccessToken } from "@/lib/auth/client";
 
 export default function DashboardPage() {

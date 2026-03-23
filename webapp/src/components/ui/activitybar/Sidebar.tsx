@@ -38,8 +38,7 @@ interface User {
 const NAV_ITEMS: NavItem[] = [
   { id: "dashboard", icon: <House className="w-5 h-5 shrink-0" />, label: "Dashboard" },
   { id: "workspace", icon: <Box className="w-5 h-5 shrink-0" />, label: "Workspace"  },
-  { id: "analytics", icon: <ChartSpline className="w-5 h-5 shrink-0" />, label: "Analytics" },
-
+  { id: "graphy", icon: <ChartSpline className="w-5 h-5 shrink-0" />, label: "Graphy" },
 ];
 
 // ── Utility Functions ─────────────────────────────────────────────────────────

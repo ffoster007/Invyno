@@ -9,7 +9,7 @@
 
 import { useState, useMemo } from "react";
 import Sidebar from "@/components/ui/activitybar/Sidebar";
-import Analytics from "@/components/interfaces/Analytics/page";
+import Graphy from "@/components/interfaces/Graphy/page";
 import Workspace from "@/components/interfaces/Workspace/page";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -221,7 +221,7 @@ export default function Page() {
           </>
         )}
         
-        {active === "analytics" && <Analytics />}
+        {active === "graphy" && <Graphy />}
         {active === "workspace" && <Workspace />}
       </main>
     </div>
