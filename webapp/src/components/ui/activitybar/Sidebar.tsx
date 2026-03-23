@@ -9,7 +9,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { House, LineChart } from "lucide-react";
+import { House, Box, ChartSpline } from "lucide-react";
 import Avatar from "./Avatar";
 import { getAccessToken, refreshAccessToken } from "@/lib/auth/client";
 
@@ -37,7 +37,9 @@ interface User {
 
 const NAV_ITEMS: NavItem[] = [
   { id: "dashboard", icon: <House className="w-5 h-5 shrink-0" />, label: "Dashboard" },
-  { id: "portfolio", icon: <LineChart       className="w-5 h-5 shrink-0" />, label: "Portfolio"  },
+  { id: "workspace", icon: <Box className="w-5 h-5 shrink-0" />, label: "Workspace"  },
+  { id: "analytics", icon: <ChartSpline className="w-5 h-5 shrink-0" />, label: "Analytics" },
+
 ];
 
 // ── Utility Functions ─────────────────────────────────────────────────────────
@@ -75,10 +77,10 @@ function NavButton({
       className={[
         "w-full h-10 px-2.5 rounded-lg",
         "flex items-center gap-3",
-        "transition-colors cursor-pointer",
+        " cursor-pointer",
         isActive
-          ? "bg-[#EFDB00] text-white"
-          : "text-[#8b949e] hover:bg-[#EFDB00] hover:text-[#c9d1d9]",
+          ? "bg-[#] text-white"
+          : "text-[#8b949e] hover:bg-[#707070] hover:text-[#c9d1d9]",
       ].join(" ")}
     >
       {item.icon}
@@ -153,7 +155,7 @@ export default function Sidebar({ active, onNavigate }: SidebarProps) {
           className="shrink-0 select-none"
         />
         {/* App name fades in beside logo on hover */}
-        <span className="ml-3 text-[#e6edf3] text-sm font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <span className="ml-3 text-[#e6edf3] text-sm font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100">
           Invyno
         </span>
       </div>
