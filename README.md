@@ -40,6 +40,11 @@ cd Invyno
 cp webapp/.env.example webapp/.env
 bash setup.sh
 ```
+## Windows setup
 
+```powershell
+copy webapp\.env.example webapp\.env
+.\setup.ps1
+```
 ## LICENSE
 This project is licensed under the MIT License 
