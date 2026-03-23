@@ -141,7 +141,7 @@ export default function Sidebar({ active, onNavigate }: SidebarProps) {
   return (
     // `group` drives child label/name reveal via group-hover utilities.
     // `fixed` + full height keeps sidebar on top without shifting main content.
-    <aside className="group fixed left-0 top-0 h-screen z-20 flex flex-col py-5 bg-[#0d1117] border-r border-[#21262d] w-14 hover:w-52 transition-[width] duration-300 ease-in-out overflow-hidden">
+    <aside className="group fixed left-0 top-0 h-screen z-20 flex flex-col py-5 bg-[#0d1117] border-r border-[#21262d] w-14 hover:w-52 overflow-hidden">
 
       {/* Logo ───────────────────────────────────────────────────────────────── */}
       <div className="flex items-center px-3.5 mb-6 shrink-0">
