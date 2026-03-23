@@ -9,6 +9,8 @@
 
 import { useState, useMemo } from "react";
 import Sidebar from "@/components/ui/activitybar/Sidebar";
+import Analytics from "@/components/interfaces/Analytics/page";
+import Workspace from "@/components/interfaces/Workspace/page";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -147,75 +149,80 @@ export default function Page() {
           Sidebar expanding on hover is an overlay and does NOT shift this. */}
       <main className="ml-14 min-h-screen p-6">
 
-        {/* Header */}
-        <header className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-[#e6edf3] text-xl font-semibold tracking-tight">Invyno</h1>
-
-          </div>
-        </header>
-
-        {/* Row 1 — Primary stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
-          {PRIMARY_STATS.map((s) => <StatCard key={s.label} {...s} />)}
-        </div>
-
-        {/* Row 2 — Secondary stats + BTC bar chart */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
-          {SECONDARY_STATS.map((s) => <StatCard key={s.label} {...s} />)}
-          <Card className="p-4 flex flex-col justify-between">
-            <p className="text-[#8b949e] text-xs uppercase tracking-widest font-medium">BTC Balance</p>
-            <MiniBarChart />
-          </Card>
-        </div>
-
-        {/* Activity heatmap */}
-        <Card className="p-5 mb-3">
-          <div className="flex items-center justify-between mb-3">
-            <p className="text-[#8b949e] text-xs uppercase tracking-widest font-medium">Activity — Last 26 Weeks</p>
-            <HeatmapLegend />
-          </div>
-          <ActivityHeatmap data={heatmapData} />
-        </Card>
-
-        {/* Row 3 — Insight + Work-life donut */}
-        <div className="grid grid-cols-2 gap-3 mb-3">
-
-          <Card className="p-5">
-            <p className="text-[#8b949e] text-xs uppercase tracking-widest font-medium mb-2">Insight</p>
-            <h3 className="text-[#e6edf3] text-sm font-semibold leading-snug mb-2">Aesthetic-Usability Effect</h3>
-            <p className="text-[#8b949e] text-xs leading-relaxed">
-              Users often perceive aesthetically pleasing design as design that's more usable.
-            </p>
-            <div className="mt-4 flex items-center gap-2">
-              <span className="text-[#39d353] text-xs">● Active</span>
-              <span className="text-[#8b949e] text-xs">/ 20 templates</span>
-            </div>
-          </Card>
-
-          <Card className="p-5 flex items-center gap-5">
-            <div className="relative shrink-0">
-              <DonutRing value={7.89} />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-[#e6edf3] text-sm font-semibold">7.89</span>
+        {/* Render different components based on active navigation */}
+        {active === "dashboard" && (
+          <>
+            {/* Header */}
+            <header className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-[#e6edf3] text-xl font-semibold tracking-tight">Invyno</h1>
               </div>
-            </div>
-            <div>
-              <p className="text-[#8b949e] text-xs uppercase tracking-widest font-medium mb-1">Work-Life Balance</p>
-              <p className="text-[#e6edf3] text-2xl font-light">
-                78.9<span className="text-sm text-[#8b949e]">%</span>
-              </p>
-              <p className="text-[#39d353] text-xs mt-1">↑ +1.2 this week</p>
-            </div>
-          </Card>
-        </div>
+            </header>
 
-        {/* Footer */}
-        <div className="border border-[#21262d] border-dashed rounded-xl px-5 py-3 flex items-center justify-between hover:border-[#30363d] transition-colors">
-          <span className="text-[#8b949e] text-xs uppercase tracking-widest">Custom Dashboard</span>
-          <span className="text-[#8b949e] text-xs">10 / 20 templates</span>
-        </div>
+            {/* Row 1 — Primary stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+              {PRIMARY_STATS.map((s) => <StatCard key={s.label} {...s} />)}
+            </div>
 
+            {/* Row 2 — Secondary stats + BTC bar chart */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+              {SECONDARY_STATS.map((s) => <StatCard key={s.label} {...s} />)}
+              <Card className="p-4 flex flex-col justify-between">
+                <p className="text-[#8b949e] text-xs uppercase tracking-widest font-medium">BTC Balance</p>
+                <MiniBarChart />
+              </Card>
+            </div>
+
+            {/* Activity heatmap */}
+            <Card className="p-5 mb-3">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-[#8b949e] text-xs uppercase tracking-widest font-medium">Activity — Last 26 Weeks</p>
+                <HeatmapLegend />
+              </div>
+              <ActivityHeatmap data={heatmapData} />
+            </Card>
+
+            {/* Row 3 — Insight + Work-life donut */}
+            <div className="grid grid-cols-2 gap-3 mb-3">
+              <Card className="p-5">
+                <p className="text-[#8b949e] text-xs uppercase tracking-widest font-medium mb-2">Insight</p>
+                <h3 className="text-[#e6edf3] text-sm font-semibold leading-snug mb-2">Aesthetic-Usability Effect</h3>
+                <p className="text-[#8b949e] text-xs leading-relaxed">
+                  Users often perceive aesthetically pleasing design as design that's more usable.
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="text-[#39d353] text-xs">● Active</span>
+                  <span className="text-[#8b949e] text-xs">/ 20 templates</span>
+                </div>
+              </Card>
+
+              <Card className="p-5 flex items-center gap-5">
+                <div className="relative shrink-0">
+                  <DonutRing value={7.89} />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-[#e6edf3] text-sm font-semibold">7.89</span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-[#8b949e] text-xs uppercase tracking-widest font-medium mb-1">Work-Life Balance</p>
+                  <p className="text-[#e6edf3] text-2xl font-light">
+                    78.9<span className="text-sm text-[#8b949e]">%</span>
+                  </p>
+                  <p className="text-[#39d353] text-xs mt-1">↑ +1.2 this week</p>
+                </div>
+              </Card>
+            </div>
+
+            {/* Footer */}
+            <div className="border border-[#21262d] border-dashed rounded-xl px-5 py-3 flex items-center justify-between hover:border-[#30363d] transition-colors">
+              <span className="text-[#8b949e] text-xs uppercase tracking-widest">Custom Dashboard</span>
+              <span className="text-[#8b949e] text-xs">10 / 20 templates</span>
+            </div>
+          </>
+        )}
+        
+        {active === "analytics" && <Analytics />}
+        {active === "workspace" && <Workspace />}
       </main>
     </div>
   );
